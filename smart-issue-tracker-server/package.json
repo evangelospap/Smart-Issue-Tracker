@@ -1,0 +1,9 @@
+{
+  "name": "smart-issue-tracker-backend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "gradlew clean build -x test --warning-mode all",
+    "start": "gradlew bootRun -x test"
+  }
+}

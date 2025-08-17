@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: smart-issue-tracker-backend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/issue_tracker
+    username: your_db_user
+    password: your_db_password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://meet-termite-51.accounts.dev

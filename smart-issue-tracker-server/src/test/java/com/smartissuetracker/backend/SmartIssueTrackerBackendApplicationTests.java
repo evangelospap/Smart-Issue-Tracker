@@ -1,4 +1,4 @@
-package com.smarttracker.backend;
+package com.smartissuetracker.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
