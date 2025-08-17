@@ -3,10 +3,11 @@
 import Link from "next/link";
 
 interface IssueCardProps {
-  readonly id: string;
+  readonly id: string | number;
   readonly title: string;
-  readonly createdAt: string;
+  readonly createdAt?: string;
   readonly summary?: string;
+  readonly status?: string; 
 }
 
 
