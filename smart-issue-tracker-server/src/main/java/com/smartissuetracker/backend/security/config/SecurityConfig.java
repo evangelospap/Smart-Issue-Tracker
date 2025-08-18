@@ -12,7 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import com.smartissuetracker.backend.security.authentication.ClerkJwtFilter;
+// import com.smartissuetracker.backend.security.authentication.ClerkJwtFilter;
 
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -21,11 +21,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
 
     private static final List<String> PUBLIC_URIS = Arrays.asList("/ping", "/**.html", "/**.js", "/**.css", "/favicon.ico");
-    private final ClerkJwtFilter clerkFilter;
+    // private final ClerkJwtFilter clerkFilter;
 
-    public SecurityConfig(ClerkJwtFilter clerkFilter) {
-        this.clerkFilter = clerkFilter;
-    }
+    // public SecurityConfig(ClerkJwtFilter clerkFilter) {
+    //     this.clerkFilter = clerkFilter;
+    // }
 
 
     @Bean
@@ -35,12 +35,13 @@ public class SecurityConfig {
             .csrf(crsf -> crsf.disable())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(createRequestMatchers()).permitAll() // no auth needed
+                .requestMatchers("/api/**").authenticated() // API endpoints require authentication
                 .anyRequest().authenticated()             // everything else requires Clerk token
             )
             // use oauth via filter authentication
-            .addFilterBefore(clerkFilter, UsernamePasswordAuthenticationFilter.class)
+            // .addFilterBefore(clerkFilter, UsernamePasswordAuthenticationFilter.class)
             // enables JWT o2auth
-            //.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {}))
+            .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {}))
             ;
             
 

@@ -13,7 +13,7 @@ import com.smartissuetracker.backend.service.IssueService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/issues")
+@RequestMapping("/issues")
 public class IssueController {
 
      private final IssueService issueService;

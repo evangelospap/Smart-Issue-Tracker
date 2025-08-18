@@ -9,7 +9,7 @@ import com.smartissuetracker.backend.service.ClerkService;
 
 import java.io.IOException;
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/users")
 public class UserController {
     private final ClerkService clerkService;
 

@@ -1,12 +1,17 @@
 import { runCustomAuthLogic } from './middlewares/auth/auth-middleware-helper'
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
-runCustomAuthLogic() // Optional logic before Clerk runs
-
 const isProtectedRoute = createRouteMatcher(['/dashboard(.*)', '/issues(.*)'])
 
+
 export default clerkMiddleware(async (auth, req) => {
-  if (isProtectedRoute(req)) await auth.protect()
+  if (isProtectedRoute(req)){
+    const session = await auth.protect();
+      // Run your pre-Clerk custom logic (logging, tracing, etc.)
+    runCustomAuthLogic(req,session);
+    
+  } 
+  
 })
 
 export const config = {
