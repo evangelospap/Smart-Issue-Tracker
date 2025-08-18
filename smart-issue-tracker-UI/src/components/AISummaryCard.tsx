@@ -1,34 +1,21 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { fetchAISummary } from "@/lib/fetchAISummary";
-
+// components/AISummaryCard.tsx
 interface AISummaryCardProps {
   title: string;
   summary: string;
   suggestedFix?: string;
 }
 
-export default function AISummaryCard({ title, summary }: AISummaryCardProps) {
-  const [aiSummary, setAiSummary] = useState<string>();
-  const [suggestedFix, setSuggestedFix] = useState<string>();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchAISummary(0, title, summary)
-      .then((res) => {
-        setAiSummary(res.summary);
-        setSuggestedFix(res.suggestedFix);
-      })
-      .finally(() => setLoading(false));
-  }, [title, summary]);
-
+export default function AISummaryCard({ title, summary, suggestedFix }: AISummaryCardProps) {
   return (
     <div className="p-4 border rounded-lg shadow bg-white">
+      <h4 className="font-semibold">Title</h4>
+      <p className="text-gray-700">{title}</p>
+
       <h4 className="font-semibold">AI Summary</h4>
-      <p className="text-gray-700">{loading ? "Generating AI summary..." : aiSummary}</p>
+      <p className="text-gray-700">{summary}</p>
+
       <h4 className="font-semibold mt-3">Suggested Fix</h4>
-      <p className="text-gray-700">{loading ? "AI is thinking..." : suggestedFix}</p>
+      <p className="text-gray-700">{suggestedFix}</p>
     </div>
   );
 }

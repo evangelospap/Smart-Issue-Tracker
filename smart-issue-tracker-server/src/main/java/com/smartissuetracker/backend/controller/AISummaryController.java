@@ -11,7 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/ai")
+@RequestMapping("/ai")
 @AllArgsConstructor
 public class AISummaryController {
 

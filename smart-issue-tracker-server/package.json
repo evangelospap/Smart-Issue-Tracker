@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "gradlew clean build -x test --warning-mode all",
-    "start": "gradlew bootRun --args='--spring.profiles.active=local' -x test",
+    "start": "gradlew bootRun -x test --warning-mode all",
     "watch-classes": "chokidar \"src/main/java/**/*.java\" -c \"gradlew classes\"",
     "hotstart": "concurrently \"npm run start\" \"npm run watch-classes\""
 

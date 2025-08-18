@@ -1,19 +1,57 @@
+
 import AISummaryCard from "@/components/AISummaryCard";
+import { fetchWithAuthServer } from "@/lib/fetchWithAuthServer";
 
 interface IssuePageProps {
   readonly params: { readonly id: string };
 }
 
-export default function IssuePage({ params }: IssuePageProps) {
-  const { id } = params;
+interface AISummary {
+  title: string;
+  summary: string;
+  suggestedFix: string;
+}
 
-  // Fake issue data
-  const issue = {
-    id,
-    title: "Login not working",
-    description: "Users report that login with Google is failing with a 500 error.",
-    createdAt: "2025-08-17",
+interface Issue {
+  id: string;
+  title: string;
+  description: string;
+  createdAt: string;
+  summary?: string;
+  status?: string;
+}
+
+// page is async because we fetch on the server
+export default async function IssuePage({ params }: IssuePageProps) {
+  // 1. Fetch issue details
+  const issue: Issue = await fetchWithAuthServer(`/api/issues/${params.id}`);
+
+  // 2. Fetch AI summary (separate endpoint, stub if not ready)
+  // let aiSummary: { title: string; summary: string; suggestedFix: string } = {
+  //   title: issue.title,
+  //   summary: "Generating AI summary...",
+  //   suggestedFix: "AI is thinking...",
+  // };
+  
+  let aiSummary: AISummary = {
+    title: issue.title,
+    summary: "Generating AI summary...",
+    suggestedFix: "AI is thinking...",
   };
+  try {
+    aiSummary = await fetchWithAuthServer(`/api/ai/summarize`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          title: issue.title,
+          summary: issue.description,
+        }),
+        headers: {}
+      });
+    console.log("AI summary fetched successfully:", aiSummary);
+  } catch (err) {
+    console.error("AI summary fetch failed:", err);
+  }
 
   return (
     <div className="space-y-6">
@@ -21,13 +59,14 @@ export default function IssuePage({ params }: IssuePageProps) {
       <p className="text-gray-700">{issue.description}</p>
       <p className="text-sm text-gray-500">Created: {issue.createdAt}</p>
 
-      {/* AI Summary Section */}
+      {/* Pass server-fetched summary directly */}
       <AISummaryCard
-        title={issue.title}
-        summary="The issue seems related to Google OAuth callback misconfiguration."
-        suggestedFix="Check OAuth redirect URIs in Google Cloud console and update your .env configuration."
+        title={aiSummary.title}
+        summary={aiSummary.summary}
+        suggestedFix={aiSummary.suggestedFix}
       />
     </div>
   );
 }
+
 // smart-issue-tracker-ui/src/app/issues/[id]/page.tsx
