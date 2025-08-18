@@ -1,31 +1,57 @@
-// form to create a new issue
-// src/app/dashboard/components/CreateIssueForm.tsx
-'use client'
-
-import { useState } from 'react'
+// src/components/IssueForm.tsx
+"use client";
+import { useState } from "react";
+import useSWR from "swr";
+import { useAuth } from "@clerk/nextjs";
 
 export default function IssueForm() {
-  const [title, setTitle] = useState('')
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const { getToken } = useAuth();
+  const { mutate } = useSWR("/api/issues");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Creating issue:', title)
-    setTitle('')
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const token = await getToken({ template: "Smart-Issue-Tracker" });
+    const res = await fetch("/api/issues", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ title, description }),
+    });
+
+    if (res.ok) {
+      setTitle("");
+      setDescription("");
+      mutate();
+    } else {
+      console.error("Failed to create issue");
+    }
+  };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 border p-4 rounded-lg">
-      <h2 className="text-lg font-semibold">➕ Create New Issue</h2>
+    <form onSubmit={handleSubmit} className="space-y-2">
       <input
         type="text"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
         placeholder="Issue title"
-        className="w-full p-2 border rounded-md"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        className="border p-2 rounded w-full"
+        required
       />
-      <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded-md">
-        Add Issue
+      <textarea
+        placeholder="Issue description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        className="border p-2 rounded w-full"
+        required
+      />
+      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+        Create Issue
       </button>
     </form>
-  )
+  );
 }
+// smart-issue-tracker-ui/src/components/IssueForm.tsx
