@@ -35,3 +35,18 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Resources Exposed envs ###
+src/main/resources/application-local.yml
+src/main/resources/.env
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+package-lock.json

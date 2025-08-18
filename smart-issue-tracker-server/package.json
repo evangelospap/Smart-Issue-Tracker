@@ -4,6 +4,11 @@
   "private": true,
   "scripts": {
     "build": "gradlew clean build -x test --warning-mode all",
-    "start": "gradlew bootRun -x test"
+    "start": "gradlew bootRun --args='--spring.profiles.active=local' -x test ",
+    "hotstart": "concurrently ./gradlew bootRun --args='--spring.profiles.active=local' -x test npm:watch-classes",
+    "watch-classes": "watch 'gradlew classes' src/main/java"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0"
   }
 }

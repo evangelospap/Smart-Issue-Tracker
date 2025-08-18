@@ -46,6 +46,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	// JWT validation
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	// postgres
+	implementation 'org.postgresql:postgresql:42.7.3'
 }
 
 tasks.named('test') {
