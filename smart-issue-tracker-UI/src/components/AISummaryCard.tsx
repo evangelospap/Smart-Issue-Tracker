@@ -2,10 +2,10 @@
 interface AISummaryCardProps {
   title: string;
   summary: string;
-  suggestedFix?: string;
+  aiSuggestion?: string;
 }
 
-export default function AISummaryCard({ title, summary, suggestedFix }: AISummaryCardProps) {
+export default function AISummaryCard({ title, summary, aiSuggestion }: AISummaryCardProps) {
   return (
     <div className="p-4 border rounded-lg shadow bg-white">
       <h4 className="font-semibold">Title</h4>
@@ -15,7 +15,7 @@ export default function AISummaryCard({ title, summary, suggestedFix }: AISummar
       <p className="text-gray-700">{summary}</p>
 
       <h4 className="font-semibold mt-3">Suggested Fix</h4>
-      <p className="text-gray-700">{suggestedFix}</p>
+      <p className="text-gray-700">{aiSuggestion}</p>
     </div>
   );
 }

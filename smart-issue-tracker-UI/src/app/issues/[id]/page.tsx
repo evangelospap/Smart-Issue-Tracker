@@ -9,7 +9,7 @@ interface IssuePageProps {
 interface AISummary {
   title: string;
   summary: string;
-  suggestedFix: string;
+  aiSuggestion: string;
 }
 
 interface Issue {
@@ -18,7 +18,7 @@ interface Issue {
   description: string;
   createdAt: string;
   summary?: string;
-  status?: string;
+  aiStatus?: string;
 }
 
 // page is async because we fetch on the server
@@ -27,16 +27,16 @@ export default async function IssuePage({ params }: IssuePageProps) {
   const issue: Issue = await fetchWithAuthServer(`/api/issues/${params.id}`);
 
   // 2. Fetch AI summary (separate endpoint, stub if not ready)
-  // let aiSummary: { title: string; summary: string; suggestedFix: string } = {
+  // let aiSummary: { title: string; summary: string; aiSuggestion: string } = {
   //   title: issue.title,
   //   summary: "Generating AI summary...",
-  //   suggestedFix: "AI is thinking...",
+  //   aiSuggestion: "AI is thinking...",
   // };
   
   let aiSummary: AISummary = {
     title: issue.title,
     summary: "Generating AI summary...",
-    suggestedFix: "AI is thinking...",
+    aiSuggestion: "AI is thinking...",
   };
   try {
     aiSummary = await fetchWithAuthServer(`/api/ai/summarize`,
@@ -63,7 +63,7 @@ export default async function IssuePage({ params }: IssuePageProps) {
       <AISummaryCard
         title={aiSummary.title}
         summary={aiSummary.summary}
-        suggestedFix={aiSummary.suggestedFix}
+        aiSuggestion={aiSummary.aiSuggestion}
       />
     </div>
   );

@@ -37,8 +37,8 @@ export default function IssueList() {
 }
 
 //   const issues = [
-//     { id: 1, title: 'Fix login bug', status: 'Open' },
-//     { id: 2, title: 'Improve dashboard layout', status: 'In Progress' },
+//     { id: 1, title: 'Fix login bug', aiStatus: 'Open' },
+//     { id: 2, title: 'Improve dashboard layout', aiStatus: 'In Progress' },
 //     { id: 3, title: "Login not working", createdAt: "2025-08-17", summary: "Users cannot log in with Google." },
 //     { id: 4, title: "UI alignment bug", createdAt: "2025-08-16", summary: "Buttons overlap on mobile view." },
 //   ]

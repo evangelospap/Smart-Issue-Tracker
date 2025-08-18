@@ -4,13 +4,13 @@ package com.smartissuetracker.backend.model;
  */
 public class AISummaryResponse {
     private String summary;
-    private String suggestedFix;
+    private String aiSuggestion;
 
-    public AISummaryResponse(String summary, String suggestedFix) {
+    public AISummaryResponse(String summary, String aiSuggestion) {
         this.summary = summary;
-        this.suggestedFix = suggestedFix;
+        this.aiSuggestion = aiSuggestion;
     }
 
     public String getSummary() { return summary; }
-    public String getSuggestedFix() { return suggestedFix; }
+    public String getaiSuggestion() { return aiSuggestion; }
 }

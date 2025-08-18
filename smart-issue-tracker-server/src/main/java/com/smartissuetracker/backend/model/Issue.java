@@ -22,12 +22,14 @@ public class Issue {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    @Column(columnDefinition = "TEXT")
     private String description;
-    private String status;
-    @Column(length = 2000)
+    @Column(length = 20)
+    private String aiStatus = "PENDING"; // PENDING | READY | ERROR
+    @Column(columnDefinition = "TEXT")
     private String aiSummary;
-    @Column(length = 2000)
-    private String suggestedFix;
+    @Column(columnDefinition = "TEXT")
+    private String aiSuggestion;
 
     private String assignee;
     private LocalDateTime createdAt;

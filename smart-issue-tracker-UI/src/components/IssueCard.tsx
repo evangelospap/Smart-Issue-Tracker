@@ -7,7 +7,7 @@ interface IssueCardProps {
   readonly title: string;
   readonly createdAt?: string;
   readonly summary?: string;
-  readonly status?: string; 
+  readonly aiStatus?: string; 
 }
 
 

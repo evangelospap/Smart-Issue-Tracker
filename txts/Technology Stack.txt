@@ -36,7 +36,7 @@ Node.js + NestJS (structured, enterprise-ready) , Django/FastAPI (Python if your
 
 Database: PostgreSQL (robust relational DB, good for issues/projects).
 
-ORM: Prisma (Node.js) or SQLAlchemy (Python).
+ORM: Prisma (Node.js) or SQLAlchemy (Python) or Hibernate for Spring Boot.
 
 Auth: JWT or Clerk/Auth0 for user accounts.
 

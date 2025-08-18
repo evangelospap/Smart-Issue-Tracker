@@ -17,8 +17,8 @@ public class AISummaryService {
         // Here you’d call OpenAI or any AI provider
         // For now, mock response
         String summary = "This issue seems related to login failure.";
-        String suggestedFix = "Check OAuth credentials and session handling.";
+        String aiSuggestion = "Check OAuth credentials and session handling.";
 
-        return new AISummaryResponse(summary, suggestedFix);
+        return new AISummaryResponse(summary, aiSuggestion);
     }
 }
