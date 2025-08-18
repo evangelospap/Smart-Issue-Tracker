@@ -2,9 +2,11 @@ import { useAuth } from "@clerk/nextjs";
 
 // Backend base URL
 const BACKEND_API = process.env.NEXT_PUBLIC_BACKEND_API || "http://localhost:8080";
-const { getToken } = useAuth();
+
+// const { getToken } = useAuth(); // ❌ INVALID in a module
 
 export async function fetchWithAuth(path: string, options: RequestInit = {}) {
+  const { getToken } = useAuth(); // ✅ inside client hook
   const token = await getToken({ template: "Smart-Issue-Tracker"});
 
   const headers = {

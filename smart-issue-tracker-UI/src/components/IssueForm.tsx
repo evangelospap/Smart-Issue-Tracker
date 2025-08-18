@@ -7,6 +7,7 @@ import { useAuth } from "@clerk/nextjs";
 export default function IssueForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [summary, setSummary] = useState("");
   const { getToken } = useAuth();
   const { mutate } = useSWR("/api/issues");
 
@@ -19,12 +20,13 @@ export default function IssueForm() {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ title, description }),
+      body: JSON.stringify({ title, description, summary }),
     });
 
     if (res.ok) {
       setTitle("");
       setDescription("");
+      setSummary("");
       mutate();
     } else {
       console.error("Failed to create issue");
@@ -47,6 +49,13 @@ export default function IssueForm() {
         onChange={(e) => setDescription(e.target.value)}
         className="border p-2 rounded w-full"
         required
+      />
+      <textarea
+        placeholder="Issue summary"
+        value={summary}
+        onChange={(e) => setSummary(e.target.value)}
+        className="border p-2 rounded w-full"
+    
       />
       <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
         Create Issue

@@ -23,6 +23,7 @@ export default function IssuePage({ params }: IssuePageProps) {
 
       {/* AI Summary Section */}
       <AISummaryCard
+        title={issue.title}
         summary="The issue seems related to Google OAuth callback misconfiguration."
         suggestedFix="Check OAuth redirect URIs in Google Cloud console and update your .env configuration."
       />
