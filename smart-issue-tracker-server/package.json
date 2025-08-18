@@ -4,11 +4,17 @@
   "private": true,
   "scripts": {
     "build": "gradlew clean build -x test --warning-mode all",
-    "start": "gradlew bootRun --args='--spring.profiles.active=local' -x test ",
-    "hotstart": "concurrently ./gradlew bootRun --args='--spring.profiles.active=local' -x test npm:watch-classes",
-    "watch-classes": "watch 'gradlew classes' src/main/java"
+    "start": "gradlew bootRun --args='--spring.profiles.active=local' -x test",
+    "watch-classes": "chokidar \"src/main/java/**/*.java\" -c \"gradlew classes\"",
+    "hotstart": "concurrently \"npm run start\" \"npm run watch-classes\""
+
+  },
+  "watch": {
+    "watch-classes": "npm run recompile-java",
+    "patterns": ["src/main/java/**/*.java"]
   },
   "devDependencies": {
-    "concurrently": "^9.2.0"
+    "concurrently": "^9.2.0",
+    "chokidar-cli": "^3.0.0"
   }
 }

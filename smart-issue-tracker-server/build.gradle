@@ -38,7 +38,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	// Spring Boot DevTools (hot reload)
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
 	// Spring Testing
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
@@ -46,8 +46,15 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	// JWT validation
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-	// postgres
-	implementation 'org.postgresql:postgresql:42.7.3'
+	// Clerk SDK for authentication
+	// implementation 'com.clerk:backend-api:3.1.0'
+	// okhttp for HTTP requests
+	implementation 'com.squareup.okhttp3:okhttp:5.1.0'
+	// Jackson for JSON processing
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+	// JWT parsing
+	implementation 'com.auth0:java-jwt:4.5.0'
+	
 }
 
 tasks.named('test') {
