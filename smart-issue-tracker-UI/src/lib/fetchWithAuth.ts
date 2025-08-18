@@ -22,3 +22,27 @@ export async function fetchWithAuth(path: string, options: RequestInit = {}) {
 
   return res.json();
 }
+
+// Define a custom hook for fetching with auth
+export function useFetchWithAuth() {
+  const { getToken } = useAuth();
+
+  return async function fetchWithAuth(path: string, options: RequestInit = {}) {
+    const token = await getToken({ template: "Smart-Issue-Tracker" });
+
+    const headers = {
+      ...options.headers,
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}${path}`, { ...options, headers });
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(`Request failed: ${res.status} - ${errorText}`);
+    }
+
+    return res.json();
+  };
+}

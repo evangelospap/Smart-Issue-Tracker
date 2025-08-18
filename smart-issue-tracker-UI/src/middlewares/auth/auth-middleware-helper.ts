@@ -9,12 +9,8 @@ export async function runCustomAuthLogic(req: NextRequest, session:SignedInAuthO
   if (process.env.NODE_ENV === "development") {
     console.log("📡 Incoming request:", req.url);
     console.log("🔐 Auth header:", req.headers.get("authorization"));
+    console.log("🔐 Session :", session);
+    const jwt = await session.getToken();
+    console.log("🔑 Clerk session jwt:", jwt);
   }
-    // 👉 Example: log the JWT (only in dev!)
-    if (process.env.NODE_ENV === "development") {
-      // Example: log the session claims (only in dev!)
-      const jwt = await session.getToken();
-      console.log("🔑 Clerk session jwt:", jwt);
-    }
-
 }

@@ -12,7 +12,6 @@ export default async function DashboardPage() {
     <div className="space-y-4">
       <h1 className="text-2xl font-bold mb-4">Welcome, {user?.firstName}</h1>
       <h1 className="text-2xl font-bold">📋 Issue Tracker Dashboard</h1>
-      {/* <CreateIssueForm /> */}
       <IssueList />
       <IssueForm />
     </div>
