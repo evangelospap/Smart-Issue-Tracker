@@ -13,7 +13,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import com.smartissuetracker.backend.security.authentication.ClerkJwtFilter;
-import com.smartissuetracker.backend.security.authentication.JwtVerifier;
 
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -22,16 +21,15 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
 
     private static final List<String> PUBLIC_URIS = Arrays.asList("/ping", "/**.html", "/**.js", "/**.css", "/favicon.ico");
-    private final JwtVerifier jwtVerifier;
+    private final ClerkJwtFilter clerkFilter;
 
-    public SecurityConfig(JwtVerifier jwtVerifier) {
-        this.jwtVerifier = jwtVerifier;
+    public SecurityConfig(ClerkJwtFilter clerkFilter) {
+        this.clerkFilter = clerkFilter;
     }
 
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        ClerkJwtFilter clerkFilter = new ClerkJwtFilter(jwtVerifier);
         http
             // disable CSRF protection for simplicity, adjust as needed
             .csrf(crsf -> crsf.disable())

@@ -30,7 +30,10 @@ public class JwtConfig {
         String cleanPem = pem
             .replace("-----BEGIN PUBLIC KEY-----", "")
             .replace("-----END PUBLIC KEY-----", "")
-            .replaceAll("\\s", "");
+            .trim();
+
+        // Remove line breaks safely
+        cleanPem = cleanPem.replaceAll("\\r?\\n", "");
 
         byte[] decoded = Base64.getDecoder().decode(cleanPem);
         X509EncodedKeySpec spec = new X509EncodedKeySpec(decoded);

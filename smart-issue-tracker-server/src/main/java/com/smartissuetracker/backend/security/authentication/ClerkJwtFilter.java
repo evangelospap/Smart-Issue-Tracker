@@ -1,16 +1,19 @@
 package com.smartissuetracker.backend.security.authentication;
 
-import org.springframework.lang.NonNull;
-import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.GenericFilterBean;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-
-public class ClerkJwtFilter extends OncePerRequestFilter {
+@Component
+public class ClerkJwtFilter extends GenericFilterBean {
 
     private final JwtVerifier verifier;
     private final JwtService jwtService;
@@ -21,11 +24,14 @@ public class ClerkJwtFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(
-            @NonNull HttpServletRequest request,
-            @NonNull HttpServletResponse response,
-            @NonNull FilterChain filterChain)
+    public void doFilter(
+            ServletRequest servletRequest,
+            ServletResponse servletResponse,
+            FilterChain filterChain)
             throws ServletException, IOException {
+
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         String jwt = this.jwtService.getRawToken(request);
         if (jwt != null) {
@@ -33,7 +39,6 @@ public class ClerkJwtFilter extends OncePerRequestFilter {
             try {
                 DecodedJWT decoded = verifier.verify(jwt);
                 String userId = decoded.getClaim("sub").asString();
-
 
                 // Attach userId to request context (optional)
                 request.setAttribute("userId", userId);
