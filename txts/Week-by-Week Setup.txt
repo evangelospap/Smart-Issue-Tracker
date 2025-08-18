@@ -1,0 +1,113 @@
+📆 Week-by-Week Tech Stack Setup
+Week 1 – Core Foundation
+
+- Frontend
+
+Next.js create-next-app (with TypeScript)
+
+TailwindCSS + shadcn/ui
+
+Clerk/Auth0 SDK for auth
+
+- Backend
+
+Spring Boot starter project (Spring Initializr):
+
+Spring Web
+
+Spring Data JPA
+
+PostgreSQL Driver
+
+Spring Security (for JWT later, optional)
+
+Postgres DB (local via Docker or Neon cloud)
+
+Expose POST /issues, GET /issues
+
+Week 2 – AI Integration
+
+- Backend
+
+Add OpenAI/Claude API client using WebClient
+
+Create AiService class for summarization + fix suggestion
+
+Use @Async (Spring) for non-blocking AI calls
+
+Update DB schema → add ai_summary + ai_suggestion columns
+
+- Frontend
+
+React Query to call backend APIs
+
+Show AI fields in issue card
+
+Loading spinner until AI fields are populated
+
+Week 3 – Real-Time Updates
+
+- Backend
+
+Add Spring WebSocket starter (spring-boot-starter-websocket)
+
+Enable STOMP broker /topic/issue-updates
+
+Publish update when AI completes (SimpMessagingTemplate)
+
+- Frontend
+
+Install sockjs-client + stompjs
+
+Connect to /ws endpoint
+
+Subscribe to /topic/issue-updates
+
+Update UI when new AI summary arrives
+
+Week 4 – UX & Collaboration
+
+- Frontend
+
+Add Kanban board (react-beautiful-dnd or dnd-kit)
+
+Filters/search input (fuse.js for fuzzy search)
+
+Comments section per issue (shadcn modal)
+
+- Backend
+
+Add Comment entity + repository
+
+REST endpoints for comments (POST /issues/{id}/comments)
+
+Push WebSocket updates on new comment
+
+Week 5 – Polish & Deploy
+
+- Frontend
+
+UI polish with shadcn/ui cards, avatars, badges
+
+Analytics (simple chart with Recharts)
+
+- Backend
+
+Swagger/OpenAPI docs (springdoc-openapi)
+
+Add exception handling (ControllerAdvice)
+
+Logging (Logback + JSON logs)
+
+Infra
+
+Deploy frontend → Vercel
+
+Deploy backend → Railway/Render/Fly.io (Dockerfile + Docker Compose)
+
+DB → Neon Postgres
+
+CI/CD with GitHub Actions (build + test + deploy)
+
+✅ End of Week 5:
+You’ll have a working Smart Issue Tracker MVP → create issues, get AI summaries & fix suggestions live via WebSockets, collaborate with comments, and a polished demo UI.

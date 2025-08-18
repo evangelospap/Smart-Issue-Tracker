@@ -1,0 +1,42 @@
+📌 Summary of What You’ll Use
+Frontend (UI)
+
+Framework: Next.js (React + TypeScript)
+
+Styling: TailwindCSS + shadcn/ui (Radix-based components)
+
+State/Data: React Query (server state), Zustand (local state)
+
+Realtime: WebSockets (SockJS + Stomp client)
+
+Auth: Clerk or Auth0 (quick drop-in)
+
+Backend
+
+Framework: Spring Boot (Java/Kotlin)
+
+Database: PostgreSQL (Neon/Supabase/Managed Postgres)
+
+ORM: Spring Data JPA (Hibernate)
+
+API Layer: REST (with OpenAPI/Swagger)
+
+Async/Events: CompletableFuture or Spring @Async (later Kafka/RabbitMQ if scaling)
+
+Realtime: Spring WebSocket (STOMP)
+
+AI Integration:
+
+OpenAI GPT-4o / GPT-4 for summaries
+
+Claude 3.x for long-context tickets
+
+Infra
+
+Frontend Hosting: Vercel
+
+Backend Hosting: Railway / Render / Fly.io (Spring Boot in Docker)
+
+DB Hosting: Neon / Supabase Postgres
+
+CI/CD: GitHub Actions

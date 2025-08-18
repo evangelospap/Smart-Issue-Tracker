@@ -1,0 +1,116 @@
+🚀 MVP Roadmap (0 → Demo)
+Week 1 — Core Foundation
+
+Goal: Basic issue tracker working end-to-end.
+
+Frontend (Next.js + Tailwind):
+
+Landing page + Login (Clerk/Auth0).
+
+Basic dashboard (list of issues).
+
+Form to create new issue.
+
+Backend (Spring Boot + Postgres):
+
+User + Project + Issue models (JPA).
+
+REST API: POST /issues, GET /issues.
+
+Connect to PostgreSQL (Neon/Supabase/Local).
+
+✅ By end of Week 1 → You can create and list issues manually.
+
+Week 2 — AI Integration
+
+Goal: Auto-summaries and suggested fixes.
+
+Backend AI Service:
+
+Add AiClient (calls OpenAI/Claude).
+
+Async job (thread pool or message queue).
+
+On POST /issues, trigger AI call.
+
+Save ai_summary + ai_suggestion in DB.
+
+Frontend:
+
+Show AI summary + suggestion under each issue.
+
+Loading state (spinner until AI response arrives).
+
+✅ By end of Week 2 → Create an issue, see AI summary/fix suggestion appear.
+
+Week 3 — Real-Time Updates
+
+Goal: Issues auto-refresh when AI completes.
+
+Backend:
+
+Add Spring WebSocket (/topic/issue-updates).
+
+Push message when AI summary is ready.
+
+Frontend:
+
+Subscribe via WebSocket (SockJS + Stomp).
+
+UI updates instantly when AI summary arrives.
+
+✅ By end of Week 3 → No refresh needed, AI results pop in live.
+
+Week 4 — UX & Collaboration
+
+Goal: Make it feel Jira-like.
+
+Frontend:
+
+Project board (Kanban-style using drag-and-drop).
+
+Filters/search.
+
+Simple comments per issue.
+
+Backend:
+
+Add “comments” model + API.
+
+Push WebSocket updates for comments too.
+
+✅ By end of Week 4 → Looks like a mini-Jira, AI-enhanced.
+
+Week 5 — Polish & Demo
+
+Goal: Deploy + prepare for user demo.
+
+Deployment:
+
+Frontend → Vercel.
+
+Backend → Railway/Render/Fly.io (Spring Boot container).
+
+Database → Neon/Postgres (managed).
+
+Polish:
+
+Better UI (shadcn/ui, icons, Kanban polish).
+
+Basic analytics (count of issues, avg resolution time).
+
+Error handling for AI (fallback if model fails).
+
+✅ By end of Week 5 → A working Smart Issue Tracker demo:
+
+Create an issue → AI auto-summarizes + suggests a fix → live updates → nice Kanban board.
+
+⚡ Stretch Goals (Post-MVP)
+
+Integrations: GitHub/Slack/Jira import.
+
+Embeddings: Fine-tune suggestions using your team’s historical tickets.
+
+Multi-tenant support: Companies with their own workspaces.
+
+AI Agents: Let AI auto-assign issues or draft PRs.
