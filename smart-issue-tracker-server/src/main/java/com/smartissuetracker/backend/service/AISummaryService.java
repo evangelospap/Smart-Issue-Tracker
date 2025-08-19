@@ -2,7 +2,7 @@ package com.smartissuetracker.backend.service;
 
 import org.springframework.stereotype.Service;
 
-import com.smartissuetracker.backend.model.AISummaryResponse;
+import com.smartissuetracker.backend.ai.AiSummaryResponse;
 
 @Service
 public class AISummaryService {
@@ -13,12 +13,12 @@ public class AISummaryService {
      * @param description
      * @return
      */
-    public AISummaryResponse generateSummary(String title, String description) {
+    public AiSummaryResponse generateSummary(String title, String description) {
         // Here you’d call OpenAI or any AI provider
         // For now, mock response
         String summary = "This issue seems related to login failure.";
         String aiSuggestion = "Check OAuth credentials and session handling.";
 
-        return new AISummaryResponse(summary, aiSuggestion);
+        return new AiSummaryResponse(summary, aiSuggestion);
     }
 }

@@ -1,8 +1,8 @@
-package com.smartissuetracker.backend.model;
+package com.smartissuetracker.backend.ai;
 /**
  * Represents a request for AI summary generation.
  */
-public class AISummaryRequest {
+public class AiSummaryRequest {
     private String title;
     private String summary; // or full description
 

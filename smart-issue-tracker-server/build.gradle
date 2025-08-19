@@ -65,6 +65,8 @@ dependencies {
 	implementation 'com.fasterxml.jackson.core:jackson-databind'
 	// JWT parsing
 	implementation 'com.auth0:java-jwt:4.5.0'
+	//	WebFlux for reactive programming
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	
 }
 

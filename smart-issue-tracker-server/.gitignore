@@ -37,7 +37,7 @@ out/
 .vscode/
 
 ### Resources Exposed envs ###
-src/main/resources/application-local.yml
+# src/main/resources/application-local.yml
 src/main/resources/.env
 
 # dependencies

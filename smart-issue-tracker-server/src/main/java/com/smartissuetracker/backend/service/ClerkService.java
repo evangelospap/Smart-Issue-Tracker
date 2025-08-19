@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 @Service
 public class ClerkService {
-    @Value("${clerk.secret-key}")
+    @Value("${clerk.public-key}")
     private String apiKey;
     private final OkHttpClient client = new OkHttpClient();
     public String getUserInfo(String userId) throws IOException {
