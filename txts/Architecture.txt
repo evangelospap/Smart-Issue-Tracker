@@ -1,0 +1,64 @@
+🔹 Architecture Diagram (MVP)
+
+Here’s how a Next.js + Spring Boot + AI Layer issue tracker could look:
+
+                ┌─────────────────────────┐
+                │        Frontend          │
+                │  Next.js (React + TS)    │
+                │                          │
+                │ - UI (issues, projects)  │
+                │ - Calls REST/GraphQL API │
+                │ - Subscribes to WS       │
+                └───────────▲──────────────┘
+                            │
+                REST/GraphQL │
+                            │ WebSockets
+                            │
+      ┌─────────────────────┴─────────────────────┐
+      │                 Backend                   │
+      │        Spring Boot (Java/Kotlin)          │
+      │                                           │
+      │  Issue Service      AI Service            │
+      │  (CRUD, auth, DB)   (calls OpenAI/Claude) │
+      │                                           │
+      │ - REST/GraphQL API                        │
+      │ - Publishes events (async)                │
+      │ - WS endpoint for real-time updates       │
+      └──────────▲───────────────┬────────────────┘
+                 │                │
+                 │                │ Async call
+                 │                │ (Kafka/Queue or ThreadPool)
+                 │                ▼
+         ┌─────────────┐    ┌───────────────────┐
+         │ PostgreSQL   │    │ LLM API           │
+         │ (Issues,     │    │ OpenAI/Claude     │
+         │ Summaries,   │    │                   │
+         │ Users)       │    │ Summarize + Fix   │
+         └─────────────┘    └───────────────────┘
+
+🔹 WebSockets in This Setup
+
+You’ll want real-time updates (like when an issue gets a new AI summary or another user comments).
+Spring Boot supports WebSockets very well. Options:
+
+1. Native Spring WebSocket (STOMP over SockJS)
+
+Full-featured, built-in Spring.
+
+Lets frontend (Next.js) subscribe to /topic/issue-updates.
+
+Example: when AI summary is ready → backend pushes an update to all clients viewing that issue.
+
+Works best if you need pub/sub semantics (broadcast to multiple users).
+
+2. Spring WebFlux + RSocket
+
+Reactive alternative, good for streaming events.
+
+More modern but less common than STOMP.
+
+3. Simpler Option: Server-Sent Events (SSE)
+
+If you only need one-way push (backend → frontend), SSE is lighter than WebSockets.
+
+Easier to implement in Next.js (just a streaming fetch).
